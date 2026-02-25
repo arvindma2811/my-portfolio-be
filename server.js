@@ -10,7 +10,7 @@ const app = express();
 
 // CORS for frontend
 app.use(cors({
-    origin: "https://my-portfolio-be-vmzb.onrender.com",
+    origin: "https://my-portfolio-fe-i3x4.vercel.app", 
     credentials: true
 }));
 
