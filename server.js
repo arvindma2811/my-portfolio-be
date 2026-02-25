@@ -10,7 +10,7 @@ const app = express();
 
 // CORS for frontend
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://my-portfolio-be-vmzb.onrender.com",
     credentials: true
 }));
 
