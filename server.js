@@ -4,28 +4,37 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
 dotenv.config();
-connectDB();
 
 const app = express();
 
-// CORS for frontend
-app.use(cors({
-    origin: "https://my-portfolio-fe-i3x4.vercel.app", 
-    credentials: true
-}));
+// Connect DB
+connectDB();
 
 // Middleware
 app.use(express.json());
+
+// CORS (Local + Production)
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://my-portfolio-fe-i3x4.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
-// Server
-app.listen(process.env.PORT, () =>
-    console.log(`🚀 Server running on port ${process.env.PORT}`)
-);
-
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
+
+// Start Server
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}`)
+);
